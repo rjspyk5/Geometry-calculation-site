@@ -6,26 +6,35 @@ class Geomatry{
     }
 
     handleClick(event){
-        const id=this.findIdOfClickedButton(event)
-       const result= this.calculation(id)
-       this.showResult(result)
+        const id=this.findIdOfClickedButton(event);
+        if (id=="triangle" || id=="Pentagon" || id=="Rhombus"||id=="Rectangle" || id=="Parrallelogram" || id=="Ellipse") {
+            const firstInput=event.target.parentNode.children[3].children[0].value;
+            const secondInput=event.target.parentNode.children[3].children[2].value; 
+            const result= this.calculation(id,firstInput,secondInput)          
+            this.showResult(result)
+        }
+      
     }
 
     findIdOfClickedButton(event){
-      return event.target.id
+        const id=event.target.id;
+        return id;
+       
+     
     }
 
-    calculation(id){
+    calculation(id,f,s){
+   
        if (id=="triangle" || id=="Pentagon" || id=="Rhombus")  {
-       this.RomPenTri()
+       return this.RomPenTri(f,s)
         
        }
        if (id=="Rectangle" || id=="Parrallelogram")  {
-       this.RectPar()
+       return this.RectPar(f,s)
         
        }
        if (id=="Ellipse")  {
-        this.elipse()
+        return this.elipse(f,s)
         
        }
     }
@@ -41,6 +50,7 @@ class Geomatry{
         return 3.14*a*b
     }
     showResult(result){
+       
         if (result) {
             document.getElementById("result").innerText=result
         }else{
